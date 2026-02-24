@@ -35,7 +35,7 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 export const api = {
   createApplication: (merchantId: string) =>
     request<{ id: string; decision_status: string }>(
-      "/full-revenue/applications",
+      "/applications",
       {
         method: "POST",
         body: JSON.stringify({ merchant_id: merchantId }),
@@ -44,7 +44,7 @@ export const api = {
 
   submitApplication: (id: string, formData: AllFormData) =>
     request<{ id: string; status: string; message: string }>(
-      `/full-revenue/applications/${id}/submit`,
+      `/applications/${id}/submit`,
       {
         method: "POST",
         body: JSON.stringify({ form_data: formData }),
@@ -52,16 +52,16 @@ export const api = {
     ),
 
   getApplication: (id: string) =>
-    request<Application>(`/full-revenue/applications/${id}`),
+    request<Application>(`/applications/${id}`),
 
   prequalify: (id: string) =>
     request<{ base_amount: number; bureau_offer: number; social_offer: number; fiscal_offer: number }>(
-      `/full-revenue/applications/${id}/prequal`
+      `/applications/${id}/prequal`
     ),
 
   submitConsent: (id: string, consent: { bureau_consent: true; twilio_consent: true; data_processing_consent: true }) =>
     request<{ message: string }>(
-      `/full-revenue/applications/${id}/consent`,
+      `/applications/${id}/consent`,
       {
         method: "POST",
         body: JSON.stringify(consent),
@@ -85,7 +85,7 @@ export const api = {
       formData.append("proof_of_address", files.proof_of_address);
     }
 
-    const res = await fetch(`${BASE_URL}/full-revenue/applications/${id}/kyc`, {
+    const res = await fetch(`${BASE_URL}/applications/${id}/kyc`, {
       method: "POST",
       body: formData,
       // No Content-Type header — browser sets multipart boundary automatically
