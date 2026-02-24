@@ -56,12 +56,12 @@ export default function KycSuccessPage({ params }: Props) {
 
     const now = Date.now();
     const appSecs = startedAt ? Math.round((signedAt || now) - startedAt) / 1000 : 94;
-    const approvalSecs = approvedAt ? Math.round((signedAt || now) - approvedAt) / 1000 : 12;
+    const approvalSecs = approvedAt ? Math.round((signedAt || now) - approvedAt) / 1000 : 5;
 
     setStats({
       loanAmount: offerAmounts?.fiscal ?? offerAmounts?.social ?? offerAmounts?.bureau ?? 75_000,
       applicationSeconds: Math.max(30, Math.round(appSecs)),
-      approvalSeconds: Math.max(8, Math.round(approvalSecs)),
+      approvalSeconds: Math.max(5, Math.round(approvalSecs)),
       accountLast4: "4821",
     });
 
