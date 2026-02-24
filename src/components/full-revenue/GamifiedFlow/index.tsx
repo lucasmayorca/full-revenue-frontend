@@ -209,7 +209,7 @@ export function GamifiedApplicationForm() {
     sessionStorage.setItem(SS_GOOGLE_URL, currentUrl);
     sessionStorage.setItem(SS_FLOW_STEP, "connections");
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    window.location.href = `${apiUrl}/full-revenue/oauth/facebook/redirect?applicationId=${applicationId}`;
+    window.location.href = `${apiUrl}/oauth/facebook/redirect?applicationId=${applicationId}`;
   }, [applicationId, step1Data]);
 
   const handleInstagramConnect = useCallback(
