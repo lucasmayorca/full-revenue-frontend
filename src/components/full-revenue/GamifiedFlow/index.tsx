@@ -32,9 +32,9 @@ const DEMO_FORM_DATA: Step1Values = {
 
 /* ── Default offer amounts ── */
 const DEFAULT_INITIAL      = 50_000;
-const DEFAULT_BUREAU_OFFER = 75_000;   // 1.5X
-const DEFAULT_SOCIAL_OFFER = 100_000;  // 2X
-const DEFAULT_FISCAL_OFFER = 200_000;  // 4X
+const DEFAULT_BUREAU_OFFER = 60_000;   // Credit Bureau & Twilio
+const DEFAULT_SOCIAL_OFFER = 70_000;   // + Spatial Data
+const DEFAULT_FISCAL_OFFER = 100_000;  // + Financial Data
 
 export function GamifiedApplicationForm() {
   const router       = useRouter();

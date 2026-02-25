@@ -59,7 +59,7 @@ export default function KycSuccessPage({ params }: Props) {
     const approvalSecs = approvedAt ? Math.round((signedAt || now) - approvedAt) / 1000 : 5;
 
     setStats({
-      loanAmount: offerAmounts?.fiscal ?? offerAmounts?.social ?? offerAmounts?.bureau ?? 75_000,
+      loanAmount: offerAmounts?.fiscal ?? offerAmounts?.social ?? offerAmounts?.bureau ?? 100_000,
       applicationSeconds: Math.max(30, Math.round(appSecs)),
       approvalSeconds: Math.max(5, Math.round(approvalSecs)),
       accountLast4: "4821",
