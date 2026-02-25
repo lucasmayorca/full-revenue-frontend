@@ -55,12 +55,12 @@ export function Step6Confirm({ personal, address, bank, onConfirm, onBack, isSub
       const raw = sessionStorage.getItem("fr_offer_amounts");
       if (raw) {
         const amounts = JSON.parse(raw);
-        setLoanAmount(amounts.fiscal ?? amounts.social ?? amounts.bureau ?? 75_000);
+        setLoanAmount(amounts.fiscal ?? amounts.social ?? amounts.bureau ?? 100_000);
       } else {
-        setLoanAmount(75_000);
+        setLoanAmount(100_000);
       }
     } catch {
-      setLoanAmount(75_000);
+      setLoanAmount(100_000);
     }
   }, []);
 

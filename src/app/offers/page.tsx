@@ -108,7 +108,7 @@ export default function OffersPage() {
 
           {/* Monto */}
           <p className="text-3xl font-bold text-gray-400 mb-1">
-            $200,000
+            $100,000
             <span className="text-lg font-normal text-gray-400 ml-1">MXN</span>
           </p>
           <p className="text-sm text-gray-400 mb-4">Monto máximo estimado</p>

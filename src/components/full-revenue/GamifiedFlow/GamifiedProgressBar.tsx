@@ -12,11 +12,11 @@ export type FlowStep =
 const STEPS: { key: FlowStep; label: string; icon: string }[] = [
   { key: "identity",    label: "Negocio",   icon: "🏢" },
   { key: "consent",     label: "Autorizar", icon: "✅" },
-  { key: "offer1",      label: "$75k",      icon: "🎯" },
+  { key: "offer1",      label: "$60k",      icon: "🎯" },
   { key: "connections", label: "Digital",   icon: "📍" },
-  { key: "offer2",      label: "$100k",     icon: "🚀" },
+  { key: "offer2",      label: "$70k",      icon: "🚀" },
   { key: "fiscal",      label: "Fiscal",    icon: "🏛️" },
-  { key: "offer3",      label: "$200k",     icon: "🏆" },
+  { key: "offer3",      label: "$100k",     icon: "🏆" },
 ];
 
 const STEP_ORDER = STEPS.map((s) => s.key);
