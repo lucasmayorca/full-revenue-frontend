@@ -22,6 +22,14 @@ const SS_APP_ID      = "fr_app_id";
 const SS_FB_TOKEN    = "fr_fb_token";
 const SS_FISCAL      = "fr_fiscal_data";
 
+/* ── Demo pre-fill data ── */
+const DEMO_FORM_DATA: Step1Values = {
+  legal_name: "Restaurante El Buen Sabor S.A. de C.V.",
+  address: "Av. Insurgentes Sur 1234, Col. Del Valle, CDMX, C.P. 03100",
+  phone: "5512345678",
+  email: "contacto@buensabor.com.mx",
+};
+
 /* ── Default offer amounts ── */
 const DEFAULT_INITIAL      = 50_000;
 const DEFAULT_BUREAU_OFFER = 75_000;   // 1.5X
@@ -47,7 +55,7 @@ export function GamifiedApplicationForm() {
       const saved = sessionStorage.getItem(SS_FORM_DATA);
       if (saved) { try { return JSON.parse(saved); } catch { /* ignore */ } }
     }
-    return {};
+    return DEMO_FORM_DATA;
   });
 
   const [fiscalData, setFiscalData] = useState<FiscalValues | null>(() => {
@@ -113,6 +121,7 @@ export function GamifiedApplicationForm() {
 
       const saved = sessionStorage.getItem(SS_FORM_DATA);
       if (saved) { try { setStep1Data(JSON.parse(saved)); } catch { /* ignore */ } }
+      else { setStep1Data(DEMO_FORM_DATA); }
 
       const savedUrl = sessionStorage.getItem(SS_GOOGLE_URL) ?? "";
       setGoogleUrl(savedUrl);

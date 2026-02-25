@@ -25,26 +25,36 @@ interface Props {
  */
 function derivePersonalPrefill(data?: Record<string, string>): Partial<Step1PersonalValues> {
   return {
-    first_name:  data?.owner_first_name ?? "Guillermo",
-    last_name:   data?.owner_last_name  ?? "Bravo",
-    birth_date:  data?.birth_date       ?? "1986-05-01",
-    nationality: "Mexicana",
-    cedula:      "",   // RFC — el usuario lo llena, Rappi no lo comparte
+    first_name:     data?.owner_first_name ?? "Guillermo",
+    last_name:      data?.owner_last_name  ?? "Bravo",
+    birth_date:     data?.birth_date       ?? "1986-05-01",
+    nationality:    "Mexicana",
+    cedula:         "BRAG860501AB2",
+    marital_status: "casado",
   };
 }
 
 function deriveAddressPrefill(data?: Record<string, string>): Partial<Step2AddressValues> {
-  if (!data?.address) return {};
-  return { street: data.address };
+  return {
+    street:       data?.address ?? "Av. Insurgentes Sur 1234, Col. Del Valle",
+    postal_code:  "03100",
+    city:         "Ciudad de México",
+    state:        "CDMX",
+    country:      "México",
+  };
 }
 
 /** Titular de cuenta = nombre + apellido del representante, no el nombre comercial */
 function deriveBankPrefill(personal: Step1PersonalValues | null, data?: Record<string, string>): Partial<Step3BankValues> {
-  if (personal) {
-    return { account_holder: `${personal.first_name} ${personal.last_name}`.trim() };
-  }
-  const owner = [data?.owner_first_name ?? "Guillermo", data?.owner_last_name ?? "Bravo"].join(" ").trim();
-  return { account_holder: owner };
+  const owner = personal
+    ? `${personal.first_name} ${personal.last_name}`.trim()
+    : [data?.owner_first_name ?? "Guillermo", data?.owner_last_name ?? "Bravo"].join(" ").trim();
+  return {
+    account_holder: owner,
+    clabe:          "646180110400000001",
+    bank_name:      "BBVA México",
+    account_type:   "debito",
+  };
 }
 
 export function KycForm({ applicationId, prefillData }: Props) {
