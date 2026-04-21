@@ -22,19 +22,11 @@ const SS_APP_ID      = "fr_app_id";
 const SS_FB_TOKEN    = "fr_fb_token";
 const SS_FISCAL      = "fr_fiscal_data";
 
-/* ── Demo pre-fill data ── */
-const DEMO_FORM_DATA: Step1Values = {
-  legal_name: "Restaurante El Buen Sabor S.A. de C.V.",
-  address: "Av. Insurgentes Sur 1234, Col. Del Valle, CDMX, C.P. 03100",
-  phone: "5512345678",
-  email: "contacto@buensabor.com.mx",
-};
-
 /* ── Default offer amounts ── */
 const DEFAULT_INITIAL      = 50_000;
-const DEFAULT_BUREAU_OFFER = 60_000;   // Credit Bureau & Twilio
-const DEFAULT_SOCIAL_OFFER = 70_000;   // + Spatial Data
-const DEFAULT_FISCAL_OFFER = 100_000;  // + Financial Data
+const DEFAULT_BUREAU_OFFER = 75_000;   // 1.5X
+const DEFAULT_SOCIAL_OFFER = 100_000;  // 2X
+const DEFAULT_FISCAL_OFFER = 200_000;  // 4X
 
 export function GamifiedApplicationForm() {
   const router       = useRouter();
@@ -55,7 +47,7 @@ export function GamifiedApplicationForm() {
       const saved = sessionStorage.getItem(SS_FORM_DATA);
       if (saved) { try { return JSON.parse(saved); } catch { /* ignore */ } }
     }
-    return DEMO_FORM_DATA;
+    return {};
   });
 
   const [fiscalData, setFiscalData] = useState<FiscalValues | null>(() => {
@@ -121,7 +113,6 @@ export function GamifiedApplicationForm() {
 
       const saved = sessionStorage.getItem(SS_FORM_DATA);
       if (saved) { try { setStep1Data(JSON.parse(saved)); } catch { /* ignore */ } }
-      else { setStep1Data(DEMO_FORM_DATA); }
 
       const savedUrl = sessionStorage.getItem(SS_GOOGLE_URL) ?? "";
       setGoogleUrl(savedUrl);
@@ -218,7 +209,7 @@ export function GamifiedApplicationForm() {
     sessionStorage.setItem(SS_GOOGLE_URL, currentUrl);
     sessionStorage.setItem(SS_FLOW_STEP, "connections");
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    window.location.href = `${apiUrl}/oauth/facebook/redirect?applicationId=${applicationId}`;
+    window.location.href = `${apiUrl}/full-revenue/oauth/facebook/redirect?applicationId=${applicationId}`;
   }, [applicationId, step1Data]);
 
   const handleInstagramConnect = useCallback(
@@ -407,16 +398,16 @@ export function GamifiedApplicationForm() {
           />
 
           <button type="button" onClick={handleApplyFromOffer1} disabled={isSubmitting}
-            className="w-full bg-rappi-orange text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-200 active:scale-95 transition-all duration-150 hover:bg-rappi-orange-dark focus:outline-none disabled:opacity-50">
+            className="w-full bg-black text-white font-bold h-12 rounded-btn text-[16px] transition-colors hover:bg-uber-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-40">
             {isSubmitting ? "Enviando..." : "Aplicar ahora este crédito"}
           </button>
 
           <button type="button" onClick={handleContinueToConnections} disabled={isSubmitting}
-            className="w-full bg-white border-2 border-rappi-orange text-rappi-orange font-bold py-4 rounded-2xl text-base active:scale-95 transition-all duration-150 hover:bg-orange-50 focus:outline-none disabled:opacity-50">
-            Continuar ampliando el monto con más información
+            className="w-full bg-white border-2 border-black text-black font-bold h-12 rounded-btn text-[16px] transition-colors hover:bg-uber-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-40">
+            Ampliar el monto con más información
           </button>
 
-          <p className="text-xs text-gray-400 text-center">🔒 Sin compromiso hasta que confirmés en el paso de KYC.</p>
+          <p className="text-[12px] text-uber-gray-500 text-center">Sin compromiso hasta que confirmes en el paso de KYC.</p>
         </div>
       )}
 
@@ -446,16 +437,16 @@ export function GamifiedApplicationForm() {
           />
 
           <button type="button" onClick={handleApplyFromOffer2} disabled={isSubmitting}
-            className="w-full bg-rappi-orange text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-200 active:scale-95 transition-all duration-150 hover:bg-rappi-orange-dark focus:outline-none disabled:opacity-50">
+            className="w-full bg-black text-white font-bold h-12 rounded-btn text-[16px] transition-colors hover:bg-uber-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-40">
             {isSubmitting ? "Enviando..." : "Aplicar ahora este crédito"}
           </button>
 
           <button type="button" onClick={handleContinueToFiscal} disabled={isSubmitting}
-            className="w-full bg-white border-2 border-rappi-orange text-rappi-orange font-bold py-4 rounded-2xl text-base active:scale-95 transition-all duration-150 hover:bg-orange-50 focus:outline-none disabled:opacity-50">
-            Continuar ampliando el monto con más información
+            className="w-full bg-white border-2 border-black text-black font-bold h-12 rounded-btn text-[16px] transition-colors hover:bg-uber-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-40">
+            Ampliar el monto con más información
           </button>
 
-          <p className="text-xs text-gray-400 text-center">🔒 Sin compromiso hasta que confirmés en el paso de KYC.</p>
+          <p className="text-[12px] text-uber-gray-500 text-center">Sin compromiso hasta que confirmes en el paso de KYC.</p>
         </div>
       )}
 
@@ -479,11 +470,11 @@ export function GamifiedApplicationForm() {
           />
 
           <button type="button" onClick={handleApplyFinal} disabled={isSubmitting}
-            className="w-full bg-rappi-orange text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-200 active:scale-95 transition-all duration-150 hover:bg-rappi-orange-dark focus:outline-none disabled:opacity-50">
+            className="w-full bg-black text-white font-bold h-12 rounded-btn text-[16px] transition-colors hover:bg-uber-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-40">
             {isSubmitting ? "Enviando..." : "Aplicar al préstamo"}
           </button>
 
-          <p className="text-xs text-gray-400 text-center">🔒 Sin compromiso hasta que confirmés en el paso de KYC.</p>
+          <p className="text-[12px] text-uber-gray-500 text-center">Sin compromiso hasta que confirmes en el paso de KYC.</p>
         </div>
       )}
     </div>

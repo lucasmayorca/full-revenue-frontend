@@ -1,6 +1,10 @@
 import type { Application, AllFormData } from "@/types/application";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3001/full-revenue";
+
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  console.warn("[api] NEXT_PUBLIC_API_URL no está configurada — usando fallback localhost");
+}
 
 class ApiError extends Error {
   constructor(

@@ -55,12 +55,12 @@ export function Step6Confirm({ personal, address, bank, onConfirm, onBack, isSub
       const raw = sessionStorage.getItem("fr_offer_amounts");
       if (raw) {
         const amounts = JSON.parse(raw);
-        setLoanAmount(amounts.fiscal ?? amounts.social ?? amounts.bureau ?? 100_000);
+        setLoanAmount(amounts.fiscal ?? amounts.social ?? amounts.bureau ?? 75_000);
       } else {
-        setLoanAmount(100_000);
+        setLoanAmount(75_000);
       }
     } catch {
-      setLoanAmount(100_000);
+      setLoanAmount(75_000);
     }
   }, []);
 
@@ -158,7 +158,7 @@ export function Step6Confirm({ personal, address, bank, onConfirm, onBack, isSub
             className="mt-0.5 h-4 w-4 rounded border-gray-300 text-rappi-orange focus:ring-rappi-orange flex-shrink-0 accent-rappi-orange"
           />
           <span className="text-xs text-gray-600 leading-relaxed">
-            Confirmo que la información es correcta y autorizo a Rappi a verificar mi identidad,
+            Confirmo que la información es correcta y autorizo a R2 Capital Technologies MX a verificar mi identidad,
             consultar el Buró de Crédito y realizar el débito automático según las condiciones del crédito aprobado.
           </span>
         </label>
